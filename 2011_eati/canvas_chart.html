@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css" media="screen">
+			#simpleCanvas{
+				height:520px;
+				width:520px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="simpleCanvas">
+			Seja mais feliz, use Firefox, Chrome, Safari ou Opera!
+		</canvas>
+		<script type="text/javascript">
+						
+			window.onload = function(){
+			   
+			var data = [{x: 0,y:0},
+						{x: 50,y:50},
+						{x: 100,y:120},
+						{x: 100,y:200},
+						{x: 300,y:200},
+						{x: 400,y:100}];
+						
+			var canvas = document.getElementById('simpleCanvas');
+				
+			   if (canvas && canvas.getContext) {
+
+			      var context = canvas.getContext('2d');
+				
+			      if (canvas) {
+					
+					//configurar largura do canvas
+					canvas.height = canvas.clientHeight;
+					canvas.width = canvas.clientWidth;
+					
+					//caracteristicas do chart
+					var padding = 10;
+					var widthChart = canvas.width - (2*padding);
+					var heightChart = canvas.width - (2*padding);
+					
+					//tamanho marcadores
+					var size_x = 10;
+					var size_y = 10;
+					
+					var axis_x = 0;
+					var axis_y = 0;
+					
+					 context.fillStyle   = "#fff"; 
+					 context.strokeStyle = "#CCCCCC"; 
+					 context.lineWidth   = 20;
+					 context.strokeRect(0, 0, canvas.width, canvas.height);
+					 context.fillRect(10, 10, widthChart, heightChart);
+					 context.fill();
+					
+					 var marginLine = 0;
+					context.lineWidth   = 1;
+					//descrever linhas
+					for (var numberLine = 0; numberLine < 10; numberLine ++) {
+						
+						marginLine = numberLine * (widthChart/10) + padding;
+						context.moveTo(marginLine, padding);
+						context.lineTo(marginLine, canvas.height - padding);
+						context.moveTo(padding, marginLine);
+						context.lineTo(canvas.width - padding, marginLine);
+						
+					}
+					
+					//imprimir linhas
+					context.strokeStyle = "#ccc";
+					context.stroke();
+		
+					for(a in data){
+						
+						axis_x = data[a].x + padding - (size_x/2);
+						axis_y = canvas.height - (data[a].y - (size_y/2)) - 2*padding;
+						
+						context.fillStyle = '#cc0000';
+			         	context.fillRect(axis_x, axis_y, size_x, size_y);
+					}
+					
+					//texto
+					context.font = 'italic 400 20px Georgia, serif';
+					context.fillStyle = "#666";
+					context.fillText("EATI 2011", 30, 40, 140);
+					context.textAlign = "center";
+			      }
+			   }
+			}
+		</script>
+	</body>
+</html>
+

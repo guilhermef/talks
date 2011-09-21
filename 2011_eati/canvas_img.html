@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	</head>
+	<body>
+		<img src="teste.jpg" id="image" style="display:none;width:500px;height:375;" />
+		<canvas id="simpleCanvas" width="500" height="375">
+			Seja mais feliz, use Firefox, Chrome, Safari ou Opera!
+		</canvas>
+		<script type="text/javascript">
+			window.onload = function(){
+
+			   var canvas = document.getElementById('simpleCanvas');
+				
+			   if (canvas && canvas.getContext) {
+
+					var image = document.getElementById('image');
+					
+					canvas.width = image.height;
+					canvas.height = image.width;
+					
+			      	var context = canvas.getContext('2d');
+				  	
+					//mover de um ponto a outro do grid
+					context.translate(image.height, 0);
+					context.rotate(Math.PI/2);
+					
+					context.drawImage(image, 0, 0);
+					
+					context.restore();
+			   }
+			}
+		</script>
+	</body>
+</html>
